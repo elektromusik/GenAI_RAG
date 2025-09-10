@@ -1,16 +1,17 @@
 from typing import Any, Protocol 
-# from collections.abc import Iterable # For the support of streaming-retrieval or generators, you should use Iterable[Doc] instead of lists only.
+# Iterable (future) instead of lists only: For streaming retrieval (generators), prefer: 
+# from collections.abc import Iterable 
 from dataclasses import dataclass
 
 @dataclass
 class Query:
-	"""User query with top-k documents setting."""
+	"""End-user query with k top-ranked documents to retrieve."""
 	text: str
-	k: int = 5 # (5-20)
+	k: int = 5 # ~ 5-20
 
 @dataclass
 class Doc:
-	"""A retrieved document chunk."""
+	"""A retrieved document chunk/passage with optional metadata."""
 	id: str
 	text: str
 	metadata: dict[str, Any] | None = None
@@ -24,5 +25,5 @@ class Reranker(Protocol):
 	def rerank(self, q: Query, docs: list[Doc]) -> list[Doc]: ...
 
 class LLMClient(Protocol):
-	"""LLM Interface, just turn a prompt into text."""
+	"""LLM interface: Just turn a prompt into text (minimal)."""
 	def generate(self, prompt: str, **opts: Any) -> str: ...
