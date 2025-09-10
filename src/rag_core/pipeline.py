@@ -1,8 +1,9 @@
 from dataclass import dataclass
-from .interfaces import Query, Retriever Reranker, LLMClient, Doc
+from .interfaces import Query, Retriever, Reranker, LLMClient, Doc
 
 @dataclass
 class RAGPipeline:
+  """Composable RAG pipeline: Retrieve -> rerank (optional) -> prompt -> generate."""
   retriever: Retriever
   llm: LLMClient
   reranker: Reranker | None = None
@@ -10,8 +11,10 @@ class RAGPipeline:
 
   def run(self, q: Query) -> dict:
     docs = self.retriever.retrieve(q)
+    
     if self.reranker:
       docs = self.reranker.rerank(q, docs)
+      
     context = "\n\n".join(d.text for d in docs)
     prompt = f"{self.system_prompt}\n\nContext:\n{context}\n\nQuestion: {q.text}"
     answer = self.llm.generate(prompt)
