@@ -1,0 +1,4 @@
+[project.optional-dependencies]
+whoosh = ["whoosh>=2.7"]
+elastic = ["elasticsearch>=8"]
+pyserini = ["pyserini>=0.40.0"]
