@@ -1,4 +1,4 @@
-from typing import Protocol, List, Dict, Any, Iterable
+from typing import Protocol, List, Dict, Any #, Iterable [For the support of streaming-retrieval or generators, you should use Iterable[Doc] instead of lists only.]
 from dataclasses import dataclass
 
 @dataclass
