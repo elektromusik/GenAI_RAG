@@ -20,8 +20,5 @@ elastic  = ["elasticsearch>=8"]
 dev      = ["pytest>=8", "pytest-cov>=5", "ruff>=0.5", "mypy>=1.10", "types-requests>=2.32"]
 
 
-[tool.hatch.build.targets.wheel]
-packages = [
-    { include = "rag_core", from = "scr"}
-    # Include apps only if you moved it under scr/apps and added __init__.py
-    # { include = "apps", from = "scr" }]
+[tool.setuptools.packages.find]
+where = ["src"]
