@@ -39,7 +39,7 @@ class InMemoryBM25:
                 idf = self.idf[t]
                 freq = tf[t]
                 denom = freq + self.k1 * (1 - self.b + self.b * dl / self.avgdl)
-                score += idf * (frq * (self.k1 + 1)) / (denom + 1e-12)
+                score += idf * (freq * (self.k1 + 1)) / (denom + 1e-12)
             if score != 0.0:
                 scores[doc_id] = score
 
