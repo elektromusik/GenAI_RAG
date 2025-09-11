@@ -13,7 +13,7 @@ class RAGPipeline:
   system_prompt: str = "Answer using only the provided context."
 
   def run(self, q: Query) -> dict[str, Any]:
-    docs list[Doc] = self.retriever.retrieve(q)
+    docs: list[Doc] = self.retriever.retrieve(q)
 
     # Iterable (future):
     # If Retriever returns Iterable[Doc], do:
